@@ -78,7 +78,7 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
               .marginOnly(left: em),
         );
 
-Widget setupServerWidget() => Flexible(
+    Widget setupServerWidget() => Flexible(
        child: Offstage(
          offstage: !(!_svcStopped.value &&
              stateGlobal.svcStatus.value == SvcStatus.ready &&
