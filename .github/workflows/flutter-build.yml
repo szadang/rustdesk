@@ -255,6 +255,9 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
 
+      - name: Setup WiX for dark
+        uses: wix-toolset/setup@v1
+
       - name: Build msi
         if: env.UPLOAD_ARTIFACT == 'true'
         run: |
@@ -264,6 +267,34 @@ jobs:
           msbuild msi.sln -p:Configuration=Release -p:Platform=x64 /p:TargetVersion=Windows10
           mv ./Package/bin/x64/Release/en-us/Package.msi ../../SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.msi
           sha256sum ../../SignOutput/rustdesk-*.msi
+
+      - name: Generate Setup.exe
+        if: env.UPLOAD_ARTIFACT == 'true'
+        shell: pwsh
+        run: |
+          $version = $env:VERSION
+          $arch = $env:MATRIX_JOB_ARCH
+          $msiName = "rustdesk-$version-$arch.msi"
+          $msiPath = "SignOutput/$msiName"
+          $setupPath = "SignOutput/rustdesk-$version-$arch.setup.exe"
+          
+          Write-Host "Looking for MSI at: $msiPath"
+          if (-not (Test-Path $msiPath)) {
+            Write-Error "MSI file does not exist!"
+            exit 1
+          }
+
+          dark.exe $msiPath -x "SignOutput/temp"
+
+          $burnExe = "SignOutput/temp/burn.exe"
+          if (Test-Path $burnExe) {
+            Copy-Item $burnExe $setupPath
+            Write-Host "Successfully created: $setupPath"
+            Remove-Item "SignOutput/temp" -Recurse -Force
+          } else {
+            Write-Error "Failed to extract burn.exe from MSI"
+            exit 1
+          }
 
       - name: Sign rustdesk self-extracted file
         if: env.UPLOAD_ARTIFACT == 'true' && env.SIGN_BASE_URL != '-2'
