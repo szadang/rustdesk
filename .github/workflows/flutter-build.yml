@@ -156,6 +156,14 @@ jobs:
         env:
           VCPKG_DEFAULT_HOST_TRIPLET: ${{ matrix.job.vcpkg-triplet }}
         run: |
+          if [ "${{ matrix.job.target }}" = "i686-pc-windows-msvc" ]; then
+            echo "Forcing install of 32-bit vcpkg dependencies"
+            if ! $VCPKG_ROOT/vcpkg install libvpx:x86-windows-static openssl:x86-windows-static --x-install-root="$VCPKG_ROOT/installed"; then
+              echo "Failed to install 32-bit dependencies"
+              exit 1
+            fi
+          fi
+        
           if ! $VCPKG_ROOT/vcpkg \
             install \
             --triplet ${{ matrix.job.vcpkg-triplet }} \
