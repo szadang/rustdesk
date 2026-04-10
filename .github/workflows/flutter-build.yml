@@ -255,9 +255,6 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      - name: Setup WiX for dark
-        uses: wix-toolset/setup@v1
-
       - name: Build msi
         if: env.UPLOAD_ARTIFACT == 'true'
         run: |
@@ -272,27 +269,44 @@ jobs:
         if: env.UPLOAD_ARTIFACT == 'true'
         shell: pwsh
         run: |
-          $version = $env:VERSION
-          $arch = $env:MATRIX_JOB_ARCH
-          $msiName = "rustdesk-$version-$arch.msi"
-          $msiPath = "SignOutput/$msiName"
-          $setupPath = "SignOutput/rustdesk-$version-$arch.setup.exe"
-          
-          Write-Host "Looking for MSI at: $msiPath"
-          if (-not (Test-Path $msiPath)) {
-            Write-Error "MSI file does not exist!"
+          $wixPath = "C:\Program Files (x86)\WiX Toolset v3.14\bin"
+          if (Test-Path $wixPath) {
+            $env:Path += ";$wixPath"
+            Write-Host "Added WiX to PATH: $wixPath"
+          } else {
+            Write-Warning "WiX path not found at $wixPath. Trying to find dark.exe in default locations..."
+            $wixPath = Get-ChildItem -Path "C:\Program Files (x86)\WiX Toolset*" -Directory -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+            if ($wixPath) {
+              $env:Path += ";$wixPath\bin"
+              Write-Host "Added WiX to PATH (Auto-detected): $wixPath\bin"
+            } else {
+              Write-Error "WiX Toolset not found. Cannot run dark.exe."
+              exit 1
+            }
+          }
+          if (-not (Get-Command "dark.exe" -ErrorAction SilentlyContinue)) {
+            Write-Error "dark.exe is not available in PATH."
             exit 1
           }
+          $msiPath = "SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.msi"
+          $setupPath = "SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.setup.exe"
 
-          dark.exe $msiPath -x "SignOutput/temp"
-
-          $burnExe = "SignOutput/temp/burn.exe"
-          if (Test-Path $burnExe) {
-            Copy-Item $burnExe $setupPath
-            Write-Host "Successfully created: $setupPath"
-            Remove-Item "SignOutput/temp" -Recurse -Force
+          if (Test-Path $msiPath) {
+            Write-Host "Found MSI: $msiPath"
+            $tempDir = "SignOutput/temp_extract"
+            New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
+            dark.exe $msiPath -x $tempDir
+            $burnExe = Get-ChildItem -Path $tempDir -Filter "burn.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+            if ($burnExe) {
+              Copy-Item $burnExe $setupPath
+              Write-Host "Successfully generated Setup.exe: $setupPath"
+              Remove-Item $tempDir -Recurse -Force
+            } else {
+              Write-Error "Error: burn.exe not found in extracted files. The MSI might not be a Burn bundle."
+              exit 1
+            }
           } else {
-            Write-Error "Failed to extract burn.exe from MSI"
+            Write-Error "Error: MSI file not found at $msiPath"
             exit 1
           }
 
