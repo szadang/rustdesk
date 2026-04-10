@@ -70,8 +70,13 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          # - { target: i686-pc-windows-msvc        , os: windows-2022                  }
-          # - { target: x86_64-pc-windows-gnu       , os: windows-2022                  }
+          - { 
+              target: i686-pc-windows-msvc,
+              os: windows-2022
+            }
+          - { target: x86_64-pc-windows-gnu,
+              os: windows-2022
+            }
           - {
               target: x86_64-pc-windows-msvc,
               os: windows-2022,
@@ -291,8 +296,14 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          # - { target: i686-pc-windows-msvc        , os: windows-2022                  }
-          # - { target: x86_64-pc-windows-gnu       , os: windows-2022                  }
+          - { 
+              target: i686-pc-windows-msvc,
+              os: windows-2022
+            }
+          - { 
+              target: x86_64-pc-windows-gnu,
+              os: windows-2022
+            }
           - {
               target: i686-pc-windows-msvc,
               os: windows-2022,

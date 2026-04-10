@@ -10,7 +10,7 @@ This file contains the declaration of all the localizable strings.
 	<!-- General strings -->
 	<String Id="DowngradeError" Value="A newer version of [ProductName] is already installed." />
 
-	<String Id="AR_Comment" Value="RustDesk" />
+	<String Id="AR_Comment" Value="易合科技(旅逍客)远程控制" />
 
 	<String Id="F_App" Value="RustDesk" />
 	<String Id="F_App_Desc" Value="RustDesk - Main programs installations." />
@@ -26,8 +26,8 @@ This file contains the declaration of all the localizable strings.
 	<String Id="F_LAVFilters" Value="LAV Filters" />
 	<String Id="F_LAVFilters_Desc" Value="Recommended directshow filters for best audio and video playback experience." />
 
-	<String Id="SC_Client" Value="RustDesk" />
-	<String Id="SC_Client_Desc" Value="Start RustDesk." />
+	<String Id="SC_Client" Value="旅逍客远控" />
+	<String Id="SC_Client_Desc" Value="易合科技(旅逍客)远程控制." />
 
 	<String Id="SC_Client_Tray" Value="RustDesk Tray" />
 	<String Id="SC_Client_Tray_Desc" Value="Start RustDesk tray." />
@@ -49,8 +49,8 @@ This file contains the declaration of all the localizable strings.
 	<String Id="AnotherAppDialogTitle" Value="Cancel installation."/>
 	<String Id="AnotherAppDialogDescription" Value="The application is installed by self-installation method, please uninstall it first."/>
 
-	<String Id="MyInstallDirDlgDesktopShortcuts" Value="Create desktop icon" />
-	<String Id="MyInstallDirDlgStartMenuShortcuts" Value="Create start menu shortcuts" />
-	<String Id="MyInstallDirDlgPrinter" Value="Install RustDesk Printer" />
+	<String Id="MyInstallDirDlgDesktopShortcuts" Value="创建桌面图标" />
+	<String Id="MyInstallDirDlgStartMenuShortcuts" Value="创建开始菜单快捷方式" />
+	<String Id="MyInstallDirDlgPrinter" Value="安装虚拟打印机" />
 
 </WixLocalization>
