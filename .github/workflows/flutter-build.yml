@@ -70,17 +70,8 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          - { 
-              target: i686-pc-windows-msvc,
-              os: windows-2022,
-              arch: i686,
-              vcpkg-triplet: x86-windows-static
-            }
-          - { target: x86_64-pc-windows-gnu,
-              os: windows-2022,
-              arch: x86_64,
-              vcpkg-triplet: x64-windows-static
-            }
+          # - { target: i686-pc-windows-msvc        , os: windows-2022                  }
+          # - { target: x86_64-pc-windows-gnu       , os: windows-2022                  }
           - {
               target: x86_64-pc-windows-msvc,
               os: windows-2022,
@@ -156,14 +147,6 @@ jobs:
         env:
           VCPKG_DEFAULT_HOST_TRIPLET: ${{ matrix.job.vcpkg-triplet }}
         run: |
-          if [ "${{ matrix.job.target }}" = "i686-pc-windows-msvc" ]; then
-            echo "Forcing install of 32-bit vcpkg dependencies"
-            if ! $VCPKG_ROOT/vcpkg install libvpx:x86-windows-static openssl:x86-windows-static --x-install-root="$VCPKG_ROOT/installed"; then
-              echo "Failed to install 32-bit dependencies"
-              exit 1
-            fi
-          fi
-        
           if ! $VCPKG_ROOT/vcpkg \
             install \
             --triplet ${{ matrix.job.vcpkg-triplet }} \
@@ -308,17 +291,8 @@ jobs:
       fail-fast: false
       matrix:
         job:
-          - { 
-              target: i686-pc-windows-msvc,
-              os: windows-2022,
-              arch: i686,
-              vcpkg-triplet: x86-windows-static
-            }
-          - { target: x86_64-pc-windows-gnu,
-              os: windows-2022,
-              arch: x86_64,
-              vcpkg-triplet: x64-windows-static
-            }
+          # - { target: i686-pc-windows-msvc        , os: windows-2022                  }
+          # - { target: x86_64-pc-windows-gnu       , os: windows-2022                  }
           - {
               target: i686-pc-windows-msvc,
               os: windows-2022,
