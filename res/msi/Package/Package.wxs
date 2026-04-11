@@ -6,7 +6,7 @@
 
 	<Package Name="$(var.Product)" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" Language="!(loc.ProductLanguage)" UpgradeCode="$(var.UpgradeCode)" Scope="perMachine">
 
-		<SummaryInformation Keywords="Installer" Description="$(var.Description)" />
+		<SummaryInformation Keywords="Installer" Description="$(var.Description)" Codepage="!(loc.SummaryCodepage)" />
 
 		<!--<PropertyRef Id="UpgradesFile" />-->
 

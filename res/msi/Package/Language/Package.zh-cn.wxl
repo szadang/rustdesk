@@ -1,0 +1,56 @@
+﻿<!--
+This file contains the declaration of all the localizable strings.
+-->
+<WixLocalization Culture="zh-cn" Codepage="65001 "
+	xmlns="http://wixtoolset.org/schemas/v4/wxl">
+
+	<String Id="SummaryCodepage" Value="65001 " />
+	<String Id="ProductLanguage" Value="2052" />
+
+	<!-- General strings -->
+	<String Id="DowngradeError" Value="电脑上已安装更高版本的 [ProductName]。" />
+
+	<String Id="AR_Comment" Value="易合科技(旅逍客)远程控制" />
+
+	<String Id="F_App" Value="RustDesk" />
+	<String Id="F_App_Desc" Value="RustDesk - 核心程序安装。" />
+
+	<String Id="SC_Uninstall" Value="Uninstall RustDesk" />
+	<String Id="SC_Uninstall_Desc" Value="从电脑中移除易合科技(旅逍客)远程控制或其部分组件" />
+
+	<!-- Client related strings -->
+	<String Id="F_Client" Value="Client" />
+	<String Id="F_Client_Desc" Value="用户交互界面，播放媒体文件。" />
+	<String Id="F_Client_Plugins" Value="Plugins" />
+	<String Id="F_Client_Plugins_Desc" Value="客户端的插件。" />
+	<String Id="F_LAVFilters" Value="LAV Filters" />
+	<String Id="F_LAVFilters_Desc" Value="推荐的 DirectShow 滤镜，用于获得最佳音视频播放体验。" />
+
+	<String Id="SC_Client" Value="旅逍客远控" />
+	<String Id="SC_Client_Desc" Value="易合科技(旅逍客)远程控制." />
+
+	<String Id="SC_Client_Tray" Value="RustDesk Tray" />
+	<String Id="SC_Client_Tray_Desc" Value="启动旅逍客远程控制托盘程序。" />
+
+	<!-- Server related strings -->
+	<String Id="F_Server" Value="Server" />
+	<String Id="F_Server_Desc" Value="旅逍客远程控制的服务端部分。提供媒体库和其他服务。" />
+	<String Id="F_Server_Plugins" Value="Plugins" />
+	<String Id="F_Server_Plugins_Desc" Value="服务端的插件。" />
+
+	<String Id="Service_DisplayName" Value="RustDesk Service" />
+	<String Id="Service_Description" Value="此服务运行旅逍客远程控制服务端。" />
+
+	<!-- Launch Conditions -->
+	<String Id="LC_OS" Value="[ProductName] 需要 Windows 7 / 2008 R2 或更高版本的操作系统。" />
+	<String Id="LC_ADMIN" Value="安装 [ProductName] 需要管理员权限。" />
+
+	<!-- User Interfaces -->
+	<String Id="AnotherAppDialogTitle" Value="取消安装"/>
+	<String Id="AnotherAppDialogDescription" Value="该应用程序已通过自安装方式安装，请先卸载后再试。"/>
+
+	<String Id="MyInstallDirDlgDesktopShortcuts" Value="创建桌面图标" />
+	<String Id="MyInstallDirDlgStartMenuShortcuts" Value="创建开始菜单快捷方式" />
+	<String Id="MyInstallDirDlgPrinter" Value="安装虚拟打印机" />
+
+</WixLocalization>
