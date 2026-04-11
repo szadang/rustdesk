@@ -1,5 +1,6 @@
 ﻿<Project Sdk="WixToolset.Sdk/4.0.5">
   <PropertyGroup>
+    <Cultures>zh-CN;en-US</Cultures>
     <Codepage>65001</Codepage>
     <IncludeSearchPaths>
     </IncludeSearchPaths>
@@ -7,6 +8,8 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Package.zh-cn.wxl" />
+    <Content Include="Package.en-us.wxl" />
     <Content Include="Includes.wxi" />
     <Content Include="Resources\icon.ico" />
   </ItemGroup>
