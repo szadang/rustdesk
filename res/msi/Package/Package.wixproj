@@ -8,8 +8,8 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Package.zh-cn.wxl" />
-    <Content Include="Package.en-us.wxl" />
+    <WxlFile Include="Language\Package.zh-cn.wxl" />
+    <WxlFile Include="Language\Package.en-us.wxl" />
     <Content Include="Includes.wxi" />
     <Content Include="Resources\icon.ico" />
   </ItemGroup>
