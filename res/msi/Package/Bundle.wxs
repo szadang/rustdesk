@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?include Includes.wxi ?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
      xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
-
+     <?include Includes.wxi?>
     <Bundle Name="$(var.Product) Setup"
             Version="$(var.Version)"
             Manufacturer="$(var.Manufacturer)"
