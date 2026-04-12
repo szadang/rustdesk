@@ -13,7 +13,7 @@
 
         <Chain>
             <MsiPackage Id="RustDeskMsi"
-                        SourceFile="$(var.MsiFileName)"
+                        SourceFile="SignOutput\rustdesk-$(var.Version)-x86_64.msi"
                         Compressed="yes"
                         DisplayInternalUI="yes" 
                         Vital="yes">
