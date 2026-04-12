@@ -5,12 +5,15 @@
     </IncludeSearchPaths>
     <Configurations>Release</Configurations>
     <Platforms>x64</Platforms>
+	<OutputType>Bundle</OutputType>
+	<OutputName>rustdesk-Setup</OutputName>
   </PropertyGroup>
   <ItemGroup>
     <WxlFile Include="Language\Package.zh-cn.wxl" />
     <WxlFile Include="Language\Package.en-us.wxl" />
     <Content Include="Includes.wxi" />
     <Content Include="Resources\icon.ico" />
+	<WixSource Include="Bundle.wxs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Firewall.wixext" Version="4.0.5" />
@@ -18,6 +21,7 @@
     <PackageReference Include="WixToolset.Netfx.wixext" Version="4.0.5" />
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.5" />
     <PackageReference Include="WixToolset.Util.wixext" Version="4.0.5" />
+	<PackageReference Include="WixToolset.BootstrapperApplications.wixext" Version="4.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomActions\CustomActions.vcxproj" />

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+
+    <Bundle Name="$(var.Product) Setup"
+            Version="$(var.Version)"
+            Manufacturer="$(var.Manufacturer)"
+            UpgradeCode="$(var.UpgradeCode)"
+            IconSourceFile="Resources\icon.ico">
+
+        <Variable Name="INSTALLFOLDER_INNER" Type="string" Value="RustDesk" />
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense" />
+
+        <Chain>
+            <MsiPackage Id="RustDeskMsi"
+                        SourceFile="$(var.MsiFileName)"
+                        Compressed="yes"
+                        DisplayInternalUI="yes" 
+                        Vital="yes">
+                <MsiProperty Name="INSTALLFOLDER_INNER" Value="[INSTALLFOLDER_INNER]" />
+            </MsiPackage>
+        </Chain>
+    </Bundle>
+</Wix>
