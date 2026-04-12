@@ -1,7 +1,6 @@
 ﻿<Project Sdk="WixToolset.Sdk/4.0.5">
   <PropertyGroup>
     <Cultures>zh-cn;en-us</Cultures>
-    <Codepage>65001</Codepage>
     <IncludeSearchPaths>
     </IncludeSearchPaths>
     <Configurations>Release</Configurations>
