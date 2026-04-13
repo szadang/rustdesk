@@ -13,7 +13,7 @@
 
         <Chain>
             <MsiPackage Id="RustDeskMsi"
-                        SourceFile="SignOutput\rustdesk-$(var.Version)-x86_64.msi"
+                        SourceFile="..\SignOutput\rustdesk-$(var.Version)-x86_64.msi"
                         Compressed="yes"
                         Vital="yes">
                 <MsiProperty Name="INSTALLFOLDER_INNER" Value="[INSTALLFOLDER_INNER]" />

@@ -1,4 +1,4 @@
-﻿<Project Sdk="WixToolset.Sdk/4.0.5">
+﻿<Project Sdk="WixToolset.Bundle.Sdk/4.0.5">
   <PropertyGroup>
     <Cultures>zh-cn;en-us</Cultures>
     <IncludeSearchPaths>
@@ -21,7 +21,6 @@
     <PackageReference Include="WixToolset.Netfx.wixext" Version="4.0.5" />
     <PackageReference Include="WixToolset.UI.wixext" Version="4.0.5" />
     <PackageReference Include="WixToolset.Util.wixext" Version="4.0.5" />
-	<PackageReference Include="WixToolset.BootstrapperApplications.wixext" Version="4.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomActions\CustomActions.vcxproj" />
