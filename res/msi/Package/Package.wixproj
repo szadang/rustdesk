@@ -1,5 +1,6 @@
 ﻿<Project Sdk="WixToolset.Bundle.Sdk/4.0.5">
   <PropertyGroup>
+    <RestoreSources>https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
     <Cultures>zh-cn;en-us</Cultures>
     <IncludeSearchPaths>
     </IncludeSearchPaths>

@@ -269,46 +269,14 @@ jobs:
         if: env.UPLOAD_ARTIFACT == 'true'
         shell: pwsh
         run: |
-          $wixPath = "C:\Program Files (x86)\WiX Toolset v3.14\bin"
-          if (Test-Path $wixPath) {
-            $env:Path += ";$wixPath"
-            Write-Host "Added WiX to PATH: $wixPath"
-          } else {
-            Write-Warning "WiX path not found at $wixPath. Trying to find dark.exe in default locations..."
-            $wixPath = Get-ChildItem -Path "C:\Program Files (x86)\WiX Toolset*" -Directory -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
-            if ($wixPath) {
-              $env:Path += ";$wixPath\bin"
-              Write-Host "Added WiX to PATH (Auto-detected): $wixPath\bin"
-            } else {
-              Write-Error "WiX Toolset not found. Cannot run dark.exe."
-              exit 1
-            }
-          }
-          if (-not (Get-Command "dark.exe" -ErrorAction SilentlyContinue)) {
-            Write-Error "dark.exe is not available in PATH."
-            exit 1
-          }
-          $msiPath = "SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.msi"
-          $setupPath = "SignOutput/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.setup.exe"
-
-          if (Test-Path $msiPath) {
-            Write-Host "Found MSI: $msiPath"
-            $tempDir = "SignOutput/temp_extract"
-            New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
-            dark.exe $msiPath -x $tempDir
-            $burnExe = Get-ChildItem -Path $tempDir -Filter "burn.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
-            if ($burnExe) {
-              Copy-Item $burnExe $setupPath
-              Write-Host "Successfully generated Setup.exe: $setupPath"
-              Remove-Item $tempDir -Recurse -Force
-            } else {
-              Write-Error "Error: burn.exe not found in extracted files. The MSI might not be a Burn bundle."
-              exit 1
-            }
-          } else {
-            Write-Error "Error: MSI file not found at $msiPath"
-            exit 1
-          }
+          cd res/msi/Package
+          dotnet build Package.wixproj \
+            -p:Configuration=Release \
+            -p:Platform=x64 \
+            -p:TargetFramework=net8.0 \
+            -p:Version=${{ env.VERSION }}
+          mkdir -p ../../SignOutput
+          mv bin/Release/net8.0/rustdesk-Setup.exe ../../SignOutput/rustdesk-${{ env.VERSION }}-x86_64.setup.exe
 
       - name: Sign rustdesk self-extracted file
         if: env.UPLOAD_ARTIFACT == 'true' && env.SIGN_BASE_URL != '-2'
